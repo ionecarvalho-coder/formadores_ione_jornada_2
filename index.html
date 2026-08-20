@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestação de Contas Escolar - NRE de Ibaiti</title>
+    <!-- Google Fonts & Font Awesome para Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #f0fdf4; /* Verde bem claro suave */
+            --card-bg: #ffffff;
+            --primary-color: #0d9488; /* Verde Água / Teal */
+            --primary-hover: #0f766e;
+            --secondary-color: #1e40af; /* Azul Escuro */
+            --text-color: #1f2937;
+            --text-secondary: #4b5563;
+            --border-color: #cbd5e1;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --font-scale: 1;
+        }
+
+        /* Modo Alto Contraste */
+        body.high-contrast {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --primary-color: #facc15;
+            --primary-hover: #eab308;
+            --secondary-color: #facc15;
+            --text-color: #ffffff;
+            --text-secondary: #d1d5db;
+            --border-color: #374151;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: calc(16px * var(--font-scale));
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            padding-bottom: 60px;
+        }
+
+        /* Header / Cabeçalho com Gradiente Azul e Verde */
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #059669 100%);
+            color: #ffffff;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header-subtitle {
+            font-size: calc(1rem * var(--font-scale));
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            opacity: 0.85;
+            margin-bottom: 0.25rem;
+        }
+
+        header h1 {
+            font-size: calc(2.2rem * var(--font-scale));
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: calc(1.05rem * var(--font-scale));
+            opacity: 0.9;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        /* Estilo para a Imagem Destaque */
+        .hero-image-container {
+            text-align: center;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 250px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            object-fit: cover;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Grid de Documentos */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Card de Item */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(13, 148, 136, 0.1);
+            color: var(--primary-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        body.high-contrast .card-icon {
+            background-color: rgba(250, 204, 21, 0.2);
+        }
+
+        .card-title {
+            font-size: calc(1.2rem * var(--font-scale));
+            font-weight: 600;
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: calc(0.95rem * var(--font-scale));
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #1d4ed8, #059669);
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s;
+            text-align: center;
+        }
+
+        body.high-contrast .btn {
+            background: var(--primary-color);
+            color: #121212;
+        }
+
+        .btn:hover, .btn:focus {
+            opacity: 0.9;
+            outline: 3px solid #6ee7b7;
+        }
+
+        /* Menu Flutuante de Acessibilidade */
+        .accessibility-menu {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .accessibility-btn-toggle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        body.high-contrast .accessibility-btn-toggle {
+            color: #121212;
+        }
+
+        .accessibility-btn-toggle:hover {
+            transform: scale(1.08);
+        }
+
+        .accessibility-options {
+            display: none;
+            flex-direction: column;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: var(--shadow);
+            gap: 8px;
+        }
+
+        .accessibility-options.active {
+            display: flex;
+        }
+
+        .access-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: calc(0.9rem * var(--font-scale));
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+            width: 100%;
+            text-align: left;
+        }
+
+        .access-btn:hover, .access-btn:focus {
+            background-color: rgba(0,0,0,0.05);
+            outline: 2px solid var(--primary-color);
+        }
+
+        body.high-contrast .access-btn:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-secondary);
+            font-size: calc(0.9rem * var(--font-scale));
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            header {
+                padding: 2rem 1rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho Atualizado -->
+    <header role="banner">
+        <div class="header-subtitle">NRE de Ibaiti — Núcleo Regional de Educação</div>
+        <h1>Prestação de Contas Escolar</h1>
+        <p>Central de orientações, manuais, guias e normas para apoio às escolas jurisdicionadas na gestão e prestação de contas dos recursos financeiros.</p>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container" role="main">
+        
+        <!-- Nova Imagem Adicionada -->
+        <div class="hero-image-container">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Gestão e Gestão Financeira Escolar" class="hero-image">
+        </div>
+
+        <section class="grid">
+
+            <!-- Item 1: PDDE -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon" aria-hidden="true"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <h2 class="card-title">Gerenciador de Contas Federais - PDDE</h2>
+                </div>
+                <p class="card-desc">Apresentação orientativa com informações sobre a gestão e acompanhamento das contas federais do Programa Dinheiro Direto na Escola.</p>
+                <a href="https://docs.google.com/presentation/d/1d1e7piDX91YFFXM6mJiBLWuLcKLElw-r/edit?usp=sharing&ouid=106626339790093694654&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Acessar Gerenciador de Contas Federais PDDE em uma nova aba">
+                    Acessar Apresentação <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+            </article>
+
+            <!-- Item 2: Checklist 2026 -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon" aria-hidden="true"><i class="fa-solid fa-list-check"></i></div>
+                    <h2 class="card-title">Checklist – Exercício 2026</h2>
+                </div>
+                <p class="card-desc">Lista de verificação com os requisitos, documentos e etapas necessárias para a correta prestação de contas do ano corrente.</p>
+                <a href="https://drive.google.com/file/d/1jpKl64oPHT2YVlLRgM3ntqKBbCqRClwa/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Acessar Checklist Exercício 2026 em uma nova aba">
+                    Visualizar Documento <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+            </article>
+
+            <!-- Item 3: Fundo Rotativo 2026 -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon" aria-hidden="true"><i class="fa-solid fa-coins"></i></div>
+                    <h2 class="card-title">Fundo Rotativo 2026</h2>
+                </div>
+                <p class="card-desc">Instruções, normas de aplicação e prestação de contas referentes às verbas do Fundo Rotativo para o exercício de 2026.</p>
+                <a href="https://drive.google.com/file/d/16rMj3WkWS5lnlFB7OBbTeHXQbCfklDYn/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Acessar documento do Fundo Rotativo 2026 em uma nova aba">
+                    Visualizar Documento <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+            </article>
+
+            <!-- Item 4: Guia de Lançamentos - GRF -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon" aria-hidden="true"><i class="fa-solid fa-book"></i></div>
+                    <h2 class="card-title">Guia de Lançamentos - GRF</h2>
+                </div>
+                <p class="card-desc">Guia prático e instruções passo a passo para execução dos lançamentos no sistema da Guia de Recolhimento do FGTS (GRF).</p>
+                <a href="https://drive.google.com/file/d/1Y-aol8A578TFGnnkH4_T0EhQjHXBLZ4p/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Acessar Guia de Lançamentos GRF em uma nova aba">
+                    Visualizar Guia <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+            </article>
+
+            <!-- Item 5: Acesso Banco do Brasil -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon" aria-hidden="true"><i class="fa-solid fa-building-columns"></i></div>
+                    <h2 class="card-title">Acesso Banco do Brasil</h2>
+                </div>
+                <p class="card-desc">Manual e orientações sobre acesso, movimentação bancária e gerenciamento das contas públicas no Banco do Brasil.</p>
+                <a href="https://drive.google.com/file/d/1PmB_ysDIduK-ptOVcNgOKLhQBi7-BxWg/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Acessar orientações Banco do Brasil em uma nova aba">
+                    Visualizar Orientações <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+            </article>
+
+            <!-- Item 6: Orientação PDDE e Ações Integradas -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon" aria-hidden="true"><i class="fa-solid fa-file-contract"></i></div>
+                    <h2 class="card-title">Orientação PDDE e Ações Integradas</h2>
+                </div>
+                <p class="card-desc">Diretrizes complementares sobre a aplicação do PDDE e suas diferentes Ações Integradas no ambiente escolar.</p>
+                <a href="https://drive.google.com/file/d/14RDbGR_dmPEu5EksKA7wus2Y_LH8yXFq/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Acessar Orientação PDDE e Ações Integradas em uma nova aba">
+                    Visualizar Documento <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; NRE de Ibaiti — Portal de Prestação de Contas Escolar. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Menu Flutuante de Acessibilidade -->
+    <nav class="accessibility-menu" aria-label="Menu de Acessibilidade">
+        <div class="accessibility-options" id="access-options">
+            <button class="access-btn" id="btn-increase" title="Aumentar Fonte">
+                <i class="fa-solid fa-font"></i> Aumentar Fonte (+)
+            </button>
+            <button class="access-btn" id="btn-decrease" title="Diminuir Fonte">
+                <i class="fa-solid fa-font"></i> Diminuir Fonte (-)
+            </button>
+            <button class="access-btn" id="btn-contrast" title="Alternar Alto Contraste">
+                <i class="fa-solid fa-circle-half-stroke"></i> Alto Contraste
+            </button>
+            <button class="access-btn" id="btn-reset" title="Restaurar Padrão">
+                <i class="fa-solid fa-rotate-left"></i> Redefinir Acessibilidade
+            </button>
+        </div>
+        <button class="accessibility-btn-toggle" id="access-toggle" aria-expanded="false" aria-controls="access-options" title="Opções de Acessibilidade">
+            <i class="fa-solid fa-universal-access"></i>
+        </button>
+    </nav>
+
+    <!-- Script para Controles de Acessibilidade -->
+    <script>
+        const accessToggle = document.getElementById('access-toggle');
+        const accessOptions = document.getElementById('access-options');
+        const btnIncrease = document.getElementById('btn-increase');
+        const btnDecrease = document.getElementById('btn-decrease');
+        const btnContrast = document.getElementById('btn-contrast');
+        const btnReset = document.getElementById('btn-reset');
+
+        let fontScale = 1;
+
+        // Toggle do Menu Flutuante
+        accessToggle.addEventListener('click', () => {
+            const isExpanded = accessToggle.getAttribute('aria-expanded') === 'true';
+            accessToggle.setAttribute('aria-expanded', !isExpanded);
+            accessOptions.classList.toggle('active');
+        });
+
+        // Aumentar Fonte
+        btnIncrease.addEventListener('click', () => {
+            if (fontScale < 1.4) {
+                fontScale += 0.1;
+                document.documentElement.style.setProperty('--font-scale', fontScale);
+            }
+        });
+
+        // Diminuir Fonte
+        btnDecrease.addEventListener('click', () => {
+            if (fontScale > 0.8) {
+                fontScale -= 0.1;
+                document.documentElement.style.setProperty('--font-scale', fontScale);
+            }
+        });
+
+        // Alternar Alto Contraste
+        btnContrast.addEventListener('click', () => {
+            document.body.classList.toggle('high-contrast');
+        });
+
+        // Redefinir Acessibilidade
+        btnReset.addEventListener('click', () => {
+            fontScale = 1;
+            document.documentElement.style.setProperty('--font-scale', fontScale);
+            document.body.classList.remove('high-contrast');
+        });
+    </script>
+</body>
+</html>
